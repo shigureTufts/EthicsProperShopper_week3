@@ -13,7 +13,7 @@ from Q_Learning_agent import QLAgent
 
 # garlic [7.5, 17.5]
 # carrot [13.5, 17.5]
-target_pos = [13.5, 17.5]
+target_pos = [7.5, 17.5]
 def euclidean_distance(pos1, pos2):
     # Calculate Euclidean distance between two points
     return ((pos1[0] - pos2[0])**2 + (pos1[1] - pos2[1])**2)**0.5
