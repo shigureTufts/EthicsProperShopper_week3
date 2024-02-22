@@ -10,7 +10,10 @@ from env import SupermarketEnv
 from utils import recv_socket_data
 from Q_Learning_agent import QLAgent
 
-target_pos = [7.5, 17.5]  # set target position to garlic shelf
+
+# garlic [7.5, 17.5]
+# carrot [13.5, 17.5]
+target_pos = [13.5, 17.5]
 def euclidean_distance(pos1, pos2):
     # Calculate Euclidean distance between two points
     return ((pos1[0] - pos2[0])**2 + (pos1[1] - pos2[1])**2)**0.5
@@ -22,16 +25,14 @@ def calculate_reward(previous_state, current_state):
     reward = 0
     step_penalty = -0.1  # Small penalty for each step
     reward += step_penalty
-    print(current_state["violations"])
 
     # handle the reward of approaching the target (reward gets higher while approaching to target)
-    if current_state['observation']['players'][0]['curr_cart'] == -1:
+    if current_state["violations"] == '':
         target_dis_now = euclidean_distance(current_state['observation']['players'][0]['position'], target_pos)
         target_dis_pre = euclidean_distance(previous_state['observation']['players'][0]['position'], target_pos)
         reward = reward + (target_dis_pre - target_dis_now) * 10
     else:
         reward = -100
-    print(current_state['observation']['players'][0]['curr_cart'])
 
     return reward
 
