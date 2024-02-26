@@ -19,9 +19,9 @@ class QLAgent:
         # You should design a function to transform the huge state into a learnable state for the agent
         # It should be simple but also contains enough information for the agent to learn
         player_info = state['observation']['players'][0]
-        position = player_info['position']
-        curr_cart = player_info['curr_cart']
-        return json.dumps({'position': position, 'curr_cart': curr_cart}, sort_keys=True)
+        norm = state['violations']
+        position = [round(i, 1) for i in player_info['position']]
+        return json.dumps({'position': position, 'violations': norm}, sort_keys=True)
 
     def check_add(self, state):
         if self.trans(state) not in self.qtable.index:
