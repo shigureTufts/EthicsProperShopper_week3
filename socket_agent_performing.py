@@ -21,7 +21,7 @@ if __name__ == "__main__":
     # Initialize Q-learning agent
     action_space = len(action_commands) - 1   # Assuming your action space size is equal to the number of action commands
     agent = QLAgent(action_space)
-    agent.qtable = pd.read_json('saved_qtable/qtable_v2.json')
+    agent.qtable = pd.read_json('qtable.json')
 
     
     
@@ -32,7 +32,7 @@ if __name__ == "__main__":
     sock_game.connect((HOST, PORT))
 
     training_time = 100
-    episode_length = 1000
+    episode_length = 250
     for i in range(training_time):
         sock_game.send(str.encode("0 RESET"))  # reset the game
         state = recv_socket_data(sock_game)
